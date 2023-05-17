@@ -20,12 +20,12 @@ const todoList = {
 
   printAll: function () {
     for (let i = 0; i < this.items.length; i++) {
-      console.log(this.items[i].text);
+      this.print(i);
     }
   },
 
   add: function (text) {
-    this.items.unshift({ text, completed: false });
+    this.items.unshift({ text, completed: true });
   },
 
   remove: function (index) {
@@ -33,14 +33,18 @@ const todoList = {
   },
 
   print: function (index) {
-    console.log(this.items[index].text);
+    const item = this.items[index];
+
+    console.log(`${item.completed ? `[x] ${item.text}` : `[ ] ${item.text}`}`);
   },
 
-  complete: function (index) {},
+  complete: function (index) {
+    this.items[index].completed = true;
+  },
 };
-todoList.add("Перети к слудующему разделу");
-todoList.remove(1);
-todoList.print(0);
-// console.log(todoList.printAll());
 
-// console.log(todoList.items);
+todoList.add("Перети к слудующему разделу");
+
+todoList.complete(2);
+
+todoList.printAll();
